@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+      <title>{% block title %}{% endblock %} - My Webpage</title>
+    {% endblock %}
+  </head>
+  <body>
+
+    <a href="/"><img src="{{ url_for('static', filename='logo.jpg') }}"></img></a>
+    
+
+    <!-- Navigation bar -->
+    <ul>
+      <li><a href="/">Home</a></li>
+
+      <li class="dropdown">
+        <a href="/articles" class="dropbtn">Articles</a>
+          <div class="dropdown-content">
+            <a href="/articles/ios-music">iOS Music</a>
+            <a href="/articles/full-daws">Full-Fledge DAWs</a>
+            <a href="/articles/music-reviews">Music Reviews</a>
+          </div>
+      </li>
+
+      <li><a href="">Contact</a></li>
+
+      {% if not session['logged_in'] %}
+        <li><a href=""> Login </a></li>
+      {% endif %}
+      {% if session['logged_in'] %}
+        <li><a href=""> Logout </a></li>
+      {% endif %}
+
+    </ul>
+
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="footer">
+      {% block footer %}
+      &copy; Copyright 2018 by Patrick Downey.
+      {% endblock %}
+    </div>
+  </body>
+</html>
