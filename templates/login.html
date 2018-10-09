@@ -1,14 +1,27 @@
 {% extends "layout.html" %}
 
+
 {% block content %}
+<h1>Login</h1>
 {% if session['logged_in'] %}
 <p>You're logged in already!</p>
 {% else %}
 <form action="/login" method="POST">
-  <input type="username" name="username" placeholder="Username">
-  <input type="password" name="password" placeholder="Password">
-  <input type="submit" value="Log in">
+  <table>
+  <tbody>
+	<tr>
+	 	<td>Username/Email:</td>
+  		<td><input type="username" name="username" placeholder="Username"></td>
+	</tr>
+	<tr>
+  		<td>Password:</td>
+  		<td><input type="password" name="password" placeholder="Password"></td>
+	</tr>
+  </tbody>
+  </table>
+<input type="submit" value="Log in">
 </form>
+
 {% endif %}
 
 <!-- Use if not statement for feedback -->

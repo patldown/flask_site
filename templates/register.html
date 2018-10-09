@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Register</h1>
+{% if session['logged_in'] %}
+<p>You're logged in already!</p>
+{% else %}
+<form action="/register" method="POST">
+  <table><tbody>
+  	<tr>
+		<td>Username/Email:</td>
+  		<td><input type="username" name="username" placeholder="Username"></td>
+	</tr>
+	<tr>
+		<td>Password:</td>
+		<td><input type="password" name="password" placeholder="Password"></td>
+	</tr>
+	<tr>
+		<td>First Name:</td>
+		<td><input type="text" name="FirstName" placeholder="First Name"></td>
+	</tr>
+	<tr>
+		<td>Middle Name:</td>
+		<td><input type="text" name="MiddleName" placeholder="Middle Name"></td>
+	</tr>
+	<tr>
+		<td>Last Name:</td>
+		<td><input type="text" name="LastName" placeholder="Last Name"></td>
+	</tr>
+	<tr>
+		<td>Birth Month/Year:</td>
+		<td>
+			<select name="Month">
+				{% for month in months %}
+				<option value='{{month}}'>{{month}}</option>
+				{% endfor %}
+			</select>
+
+			<select name="Year">
+				{% for year in years %}
+				<option value='{{year}}'>{{year}}</option>
+				{% endfor %}
+			</select>
+		</td>
+	</tr>
+  
+  
+  
+  </tbody></table>
+<input type="submit" value="Register">
+</form>
+{% endif %}
+
+<!-- Use if not statement for feedback -->
+
+{% endblock %}
