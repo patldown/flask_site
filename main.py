@@ -33,6 +33,7 @@ def login():
                 session['logged_in'] = True
                 session['username'] = login_info[request.form['username'].strip()][1] +\
                                       ' ' + login_info[request.form['username'].strip()][3]
+                session['identifier'] = request.form['username'].strip()
                 print(session['username'])
             else:
                 flash('Login and/or Password is incorrect!')
@@ -78,6 +79,7 @@ def register():
                 flash('Success')
                 session['logged_in'] = True
                 session['username'] = request.form['FirstName'].strip() + ' ' + request.form['LastName'].strip()
+                session['identifier'] = request.form['username'].strip()
                 return index()
             else:
                 flash('Missing required fields!')
@@ -85,10 +87,25 @@ def register():
     else:
         return render_template('register.html', months=months, years = years)
 
+@app.route("/profile/<username>")
+def profile(username):
+    conn = db.initialize()
+    login_info = db.login_credentials(conn)
+    db.deinitialize(conn)
+    if session['identifier'] in login_info:
+        email = session['identifier']
+        firstname = login_info[session['identifier']][1]
+        middlename = login_info[session['identifier']][2]
+        lastname = login_info[session['identifier']][3]
+        birthdate = str(login_info[session['identifier']][4]) + '/' + str(login_info[session['identifier']][5])
+        return render_template('profile.html', email = email, firstname = firstname, middlename = middlename,\
+                               lastname = lastname, birthdate = birthdate)
+
 @app.route('/logout', methods=['GET'])
 def logout():
     session['logged_in'] = False
     session['username'] = None
+    session['identifier'] = None
     return render_template('index.html')
         
 

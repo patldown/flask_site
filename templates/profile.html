@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block title %}Profile{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+  <h1>Profile</h1>
+  <p class="important">
+    Hello {{username}}, welcome to your profile! More is coming, so don't worry.
+
+    <form>
+    <table>
+      <tbody>
+        <tr>
+          <td>Username/Email:</td>
+          <td><input type="text" name="username" placeholder="{{email}}" disabled></td>
+        </tr>
+        <tr>
+          <td>First Name:</td>
+          <td><input type="text" name="FirstName" placeholder="{{firstname}}" disabled></td>
+        </tr>
+        <tr>
+          <td>Middle Name:</td>
+          <td><input type="text" name="MiddleName" placeholder="{{middlename}}" disabled></td>
+        </tr>
+        <tr>
+          <td>Last Name:</td>
+          <td><input type="text" name="LastName" placeholder="{{lastname}}" disabled></td>
+        </tr>
+        <tr>
+          <td>Birthdate:</td>
+          <td><input type="text" name="Birthdate" placeholder="{{birthdate}}" disabled></td>
+        </tr>
+        <tr>
+          <td>New Password:</td>
+          <td><input type="password" name="password" placeholder="Password"></td>
+        </tr>
+        <tr>
+          <td>Re-enter Password:</td>
+          <td><input type="password" name="password_1" placeholder="Password"></td>
+        </tr>
+      </tbody>
+    </table>
+    <input type="submit" value="Change">
+    </form>
+
+  </p>
+{% endblock %}

@@ -46,7 +46,7 @@ def login_credentials(conn):
     cursor = conn.execute("SELECT * from USERS")
     usr_info = {}
     for row in cursor:
-        usr_info[row[0]] = [row[1], row[2], row[3], row[4]]
+        usr_info[row[0]] = [row[1], row[2], row[3], row[4], row[5], row[6]]
         print('Name = ', row[1],row[2],row[3])
         print("EMAILADDRESS = ", row[0])
         print("PASSWORD = ", row[1])
