@@ -78,7 +78,7 @@ def register():
         db.deinitialize(conn)
         if request.form['username'].strip() in login_info:
             flash('Username already exists!')
-            return render_template('register.html', months=months, years = years)
+            return render_template('register.html', months=months, years = years, settings = settings)
         else:
             if request.form['password'] != '' and request.form['FirstName'] != '' and\
                request.form['LastName'] != '' and request.form['Month'] != '' and\
