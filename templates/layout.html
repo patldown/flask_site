@@ -19,8 +19,8 @@
     
 
 		<!-- Navigation bar -->
-		<ul class="nav">
-			<li class="nav"><a href="/">Home</a></li>
+		<div class="topnav">
+			<a href="/">Home</a>
 
 			<li class="dropdown">
 				<a href="/articles" class="nav">Articles</a>
@@ -30,20 +30,19 @@
 					{% endfor %}
 				</div>
 			</li>
-<!--		</ul>
-		<ul class="nav"> -->
 
-			<li class="nav"><a href="">Contact</a></li>
+			<a href="">Contact</a>
 
 			{% if not session['logged_in'] %}
-				<li class="nav"><a href="{{ url_for('login') }}"> Login </a></li>
-				<li class="nav"><a href="{{ url_for('register') }}"> Register </a></li>
+				<a href="{{ url_for('login') }}"> Login </a>
+				<a href="{{ url_for('register') }}"> Register </a>
 			{% endif %}
 			{% if session['logged_in'] %}
-				<li class="nav"><a href="{{ url_for('profile', username=session['username'])}}">Profile</a></li>		
-				<li class="nav"><a href="/logout"> Logout </a></li>
+				<a href="{{ url_for('profile', username=session['username'])}}">Profile</a>		
+				<a href="/logout"> Logout </a>
 			{% endif %}
-		</ul>
+			
+		</div>
 
 		
 
