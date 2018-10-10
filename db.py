@@ -44,7 +44,9 @@ def create_table_article(conn):
 
 def add_article(conn, TITLE=False, AUTHOR=False, DATE=False, Pictures=False, CONTENT=False, CATEGORY = False):
     if __name__ == '__main__':
-        usr_info = login_credentials(conn)
+        from main import extract_settings
+        settings = extract_settings('categories.settings')
+        usr_info = db_Aquery(conn, 'USERS')
         TITLE = input('Title:')
         auth = input('email:')
         status = False
@@ -60,13 +62,14 @@ def add_article(conn, TITLE=False, AUTHOR=False, DATE=False, Pictures=False, CON
         CONTENT = input('Textual Content:')
 
         print('SELECT a CATEGORY:')
-        print('1','-','iOS Music')
-        print('2','-','Full-Fledge DAWs')
-        print('3','-','Music Reviews')
+        for key, value in settings.items():
+            print(str(value),'-',key)
+
         CATEGORY = input('Category #: ')
-        if CATEGORY == '1':CATEGORY = 'iOS Music'
-        if CATEGORY == '1':CATEGORY = 'Full-Fledge DAWs'
-        if CATEGORY == '1':CATEGORY = 'Music Reviews'
+        for key, value in settings.items():
+            if CATEGORY == str(value):
+                CATEGORY = key
+                break
         
             
         
@@ -95,28 +98,23 @@ def add_user(conn, first, middle, last, month, year, email, password):
         0
 
 def alter_table(conn, table, new_col, Type):
-
     cursor = conn.execute('ALTER TABLE ' + table + ' ADD COLUMN ' + new_col + ' ' + Type + ';')
 
-def login_credentials(conn):
-    '''
-    inputs:= connection_string
-    '''
-    cursor = conn.execute("SELECT * from USERS")
-    usr_info = {}
-    for row in cursor:
-        usr_info[row[0]] = [row[1], row[2], row[3], row[4], row[5], row[6]]
-        print('Name = ', row[1],row[2],row[3])
-        print("EMAILADDRESS = ", row[0])
-        print("PASSWORD = ", row[1])
-    return usr_info
-
-def return_articles(conn):
-    cursor = conn.execute("SELECT * from ARTICLES")
-    usr_info = {}
-    for row in cursor:
-        usr_info[row[0]] = [row[1], row[2], row[3], row[4], row[5], row[6]]
-    return usr_info    
+def db_Aquery(conn, TABLE, add_criteria = None):
+    ### general id = [other_info] call to db table
+    if add_criteria == None:
+        cursor = conn.execute("SELECT * from " + TABLE)
+        usr_info = {}
+        for row in cursor:
+            usr_info[row[0]] = row[1:]
+        return usr_info
+    else:
+        cursor = conn.execute("SELECT * from " + TABLE)
+        usr_info = {}
+        for row in cursor:
+            if row[add_criteria[1]] == add_criteria[0]:
+                usr_info[row[0]] = row[1:]
+        return usr_info        
 
 def deinitialize(conn):
     conn.close()       

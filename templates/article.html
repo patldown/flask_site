@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}{{ article }}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+  <h1>{{ article }}</h1>
+  <small>{{ info[5] }}</small>
+  <h3> Author: {{ info[1] }} </h3> <!-- Author -->
+  <h3> Published: {{ info[2] }} </h3>
+  <p> {{ info[4] }} </p>
+{% endblock %}
