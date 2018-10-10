@@ -111,8 +111,14 @@ def logout():
 
 @app.route('/articles')
 def articles():
-    return render_template('articles.html')
+    conn = db.initialize()
+    articles = db.return_articles(conn)
+    db.deinitialize(conn)
+    return render_template('articles.html', articles = articles)
 
+@app.route('/profile/username/article_create')
+def article_create():
+    return render_template('create_article.html')
 
 app.secret_key = os.urandom(12)
 

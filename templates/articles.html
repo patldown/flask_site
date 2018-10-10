@@ -9,4 +9,9 @@
   <p class="important">
     We have a bunch of articles coming soon!
   </p>
+  <ul>
+  {% for article in articles %}
+     <li><a href = "">{{articles[article][0]}}</a></li>
+  {% endfor %}
+  </ul> 
 {% endblock %}
