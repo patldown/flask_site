@@ -5,6 +5,7 @@
 {% if session['logged_in'] %}
 <p>You're logged in already!</p>
 {% else %}
+<div class="container">
 <form action="/register" method="POST">
   <table><tbody>
   	<tr>
@@ -49,6 +50,7 @@
   </tbody></table>
 <input type="submit" value="Register">
 </form>
+</div>
 {% endif %}
 
 <!-- Use if not statement for feedback -->

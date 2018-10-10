@@ -25,24 +25,23 @@
 			<li class="dropdown">
 				<a href="/articles" class="nav">Articles</a>
 				<div class="dropdown-content">
-					<a href="/articles/ios-music">iOS Music</a>
-					<a href="/articles/full-daws">Full-Fledge DAWs</a>
-					<a href="/articles/music-reviews">Music Reviews</a>
+					{% for setting, value in settings.items() %}
+					 <a href="{{ url_for('categories', category = setting) }}">{{ setting }}</a>
+					{% endfor %}
 				</div>
 			</li>
-<!--		</ul>
-		<ul class="nav"> -->
 
-			<li class="nav"><a href="">Contact</a></li>
+			<li class="nav"><a href="">Contact</a>
 
 			{% if not session['logged_in'] %}
 				<li class="nav"><a href="{{ url_for('login') }}"> Login </a></li>
 				<li class="nav"><a href="{{ url_for('register') }}"> Register </a></li>
 			{% endif %}
 			{% if session['logged_in'] %}
-				<li class="nav"><a href="{{ url_for('profile', username=session['username'])}}">Profile</a></li>		
+				<li class="nav"><a href="{{ url_for('profile', username=session['username'])}}">Profile</a></li>	
 				<li class="nav"><a href="/logout"> Logout </a></li>
 			{% endif %}
+			
 		</ul>
 
 		

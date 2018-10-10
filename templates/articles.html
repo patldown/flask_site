@@ -1,12 +1,17 @@
 {% extends "layout.html" %}
-{% block title %}Articles{% endblock %}
+{% block title %}{{ name }}{% endblock %}
 {% block head %}
   {{ super() }}
 {% endblock %}
 {% block content %} 
 
-  <h1>Articles</h1>
+  <h1>{{ name }}</h1>
   <p class="important">
     We have a bunch of articles coming soon!
   </p>
+  <ul>
+  {% for story in articles %}
+     <li><a href = "{{url_for('article', category = articles[story][5], article = articles[story][0])}}">{{articles[story][0]}}</a></li>
+  {% endfor %}
+  </ul> 
 {% endblock %}
